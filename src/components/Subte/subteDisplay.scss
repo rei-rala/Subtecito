@@ -1,0 +1,16 @@
+.lastUpdateSign {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  text-align: center;
+  color: white;
+  background-color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+
+  cursor: default;
+  opacity: 0.75;
+  z-index: 500;
+}

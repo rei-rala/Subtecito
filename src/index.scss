@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  overflow: hidden;
+}
+/* 
+does not work =(
+.leaflet-marker-pane img svg {
+  stroke: black !important;
+  stroke-width: 50px !important;
+
+  fill: red !important;
+}
+ */
+
+ul {
+  list-style: none;
+  padding: 0;
+}
