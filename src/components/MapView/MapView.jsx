@@ -9,12 +9,14 @@ const defaultLocation = { lat: -34.5923209, lng: -58.4476092 }
 
 const MapView = ({ markers }) => {
   const { stationsInAPI } = useContext(Subte)
-  
+
   return (
     <MapContainer center={defaultLocation} zoom={12} scrollWheelZoom={true} style={{ width: '100vw', height: '100vh' }}>
       <TileLayer
         attribution='<a href="http://github.com/rei-rala/Subtecito">Subtecito</a>'
+        // Tileset Openstretmap
         //url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        //
         // Tileset GCBA
         url='https://servicios.usig.buenosaires.gob.ar/mapcache/tms/1.0.0/amba_con_transporte_3857@GoogleMapsCompatible/{z}/{x}/{-y}.png '
       />
