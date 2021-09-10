@@ -7,7 +7,7 @@ const SubteDisplay = () => {
 
   return (
     lastUpdated
-      ? <div className="lastUpdateSign" title='Ultima Actualizacion'>
+      ? <div className="lastUpdateSign" title='Ultima actualizacion del servicio'>
         < span > {lastUpdated}</span >
       </div >
       : null

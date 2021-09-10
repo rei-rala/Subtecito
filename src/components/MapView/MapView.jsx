@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { Subte } from '../../contexts/SubteContext'
 import { coord } from '../../coordenadasSubte/coordenadasSubte'
@@ -8,34 +8,21 @@ import MarkerV from '../MarkerV/MarkerV'
 const defaultLocation = { lat: -34.5923209, lng: -58.4476092 }
 
 const MapView = ({ markers }) => {
-  const { estacionesInfo } = useContext(Subte)
-  const [stationsInAPI, setStationsInAPI] = useState([])
-
-  stationsInAPI.length && console.log(stationsInAPI)
-
-  useEffect(() => {
-    if (estacionesInfo) {
-      let found = []
-      const filtrado = coord.filter(estCoord => !!estCoord.apiName)
-      filtrado.forEach(f => {
-        found[(f.linea) + '_' + (f.apiName)] = estacionesInfo.filter(ei => ei.stopName === f.apiName && ei.linea === f.linea)
-      })
-      console.log(found)
-      setStationsInAPI(found)
-    }
-  }, [estacionesInfo])
-
+  const { stationsInAPI } = useContext(Subte)
+  
   return (
     <MapContainer center={defaultLocation} zoom={12} scrollWheelZoom={true} style={{ width: '100vw', height: '100vh' }}>
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='<a href="http://github.com/rei-rala/Subtecito">Subtecito</a>'
+        //url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        // Tileset GCBA
+        url='https://servicios.usig.buenosaires.gob.ar/mapcache/tms/1.0.0/amba_con_transporte_3857@GoogleMapsCompatible/{z}/{x}/{-y}.png '
       />
       {
         markers.length
           ? markers
             .map((m, i) => <MarkerV
-              key={i}
+              key={`userMarker${i}`}
               reference={m.reference}
               position={m.position}
             />
@@ -47,14 +34,14 @@ const MapView = ({ markers }) => {
         coord
           .map((e) => {
             return <MarkerV
-              key={e.id}
+              key={`estacion${e.id}`}
               color={e.linea}
+              className='caca'
               reference={e.apiName ? e.apiName : e.estacion}
               position={{ lat: e.lat, lng: e.lng }}
-              information={e.apiName && stationsInAPI[(e.linea) + '_' + (e.apiName)] ? stationsInAPI[(e.linea) + '_' + (e.apiName)] : undefined}
+              information={e.apiName && stationsInAPI[`${e.linea}_${e.apiName}`] ? stationsInAPI[`${e.linea}_${e.apiName}`] : undefined}
             />
-          }
-          )
+          })
       }
 
 

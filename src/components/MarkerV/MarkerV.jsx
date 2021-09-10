@@ -52,7 +52,7 @@ const MarkerV = ({ color, reference, position, information }) => {
   const i = getIcon(color)
 
   const sortedInformation = information && information.sort((a, b) => a.direction > b.direction ? 1 : -1)
-  console.log(information)
+
   return (
     <Marker
       icon={i}
@@ -68,10 +68,9 @@ const MarkerV = ({ color, reference, position, information }) => {
                   ? <>
                     <hr />
                     <ul>
-
                       {
-                        sortedInformation.map(i => <li>
-                          Sentido: {i.direction} - {i.arrivalTime.full.time}
+                        sortedInformation.map((i, index) => <li key={index}>
+                          a {i.destino}: {i.arrivalTime.full.time}
                         </li>
                         )
                       }

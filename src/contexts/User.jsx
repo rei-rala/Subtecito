@@ -1,15 +1,9 @@
-import React, { FC, useState } from "react";
-import { UserContextState } from "../types/types";
+import React, { useState } from "react";
 
-const contextDefaultValues: UserContextState = {
-  isUserLoggedIn: false,
-  setIsUserLoggedIn: () => { }
-};
+export const User = React.createContext()
 
-export const User = React.createContext<UserContextState>(contextDefaultValues)
-
-export const UserContext: FC = ({ children }) => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<Boolean>(false)
+export const UserContext = ({ children }) => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
   return (
     <User.Provider
