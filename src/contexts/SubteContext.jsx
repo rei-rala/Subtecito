@@ -41,24 +41,28 @@ export const SubteContext = ({ children }) => {
 
 
   useEffect(() => {
-    const queryURL = `client_id=${creds.sid}&client_secret=${creds.token}`
-    const URL = `https://datosabiertos-transporte-apis.buenosaires.gob.ar/subtes/forecastGTFS?${queryURL}`
-
     const controller = new AbortController();
     const { signal } = controller;
 
-    fetch(URL, { signal })
-      .then(response => {
-        if (response.ok) return response.json()
-      })
-      .then(r => {
-        const lastUpdated = timeStampToDate(r.Header.timestamp)
-        setArrayEntity(r.Entity)
-        setLastUpdated(lastUpdated.full.full)
-      })
+    const retrieveDataInterval = setInterval(() => {
+      console.info('Actualizando...')
+      const queryURL = `client_id=${creds.sid}&client_secret=${creds.token}`
+      const URL = `https://datosabiertos-transporte-apis.buenosaires.gob.ar/subtes/forecastGTFS?${queryURL}`
+
+      fetch(URL, { signal })
+        .then(response => {
+          if (response.ok) return response.json()
+        })
+        .then(r => {
+          const lastUpdated = timeStampToDate(r.Header.timestamp)
+          setArrayEntity(r.Entity)
+          setLastUpdated(lastUpdated.full.full)
+        })
+    }, 5000)
 
     return () => {
       controller.abort();
+      clearInterval(retrieveDataInterval)
     }
   }, [])
 

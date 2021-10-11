@@ -41,7 +41,7 @@ const MapView = ({ markers }) => {
               className='caca'
               reference={e.apiName ? e.apiName : e.estacion}
               position={{ lat: e.lat, lng: e.lng }}
-              information={e.apiName && stationsInAPI[`${e.linea}_${e.apiName}`] ? stationsInAPI[`${e.linea}_${e.apiName}`] : undefined}
+              information={e.apiName && stationsInAPI[`${e.linea}_${e.apiName}`]}
             />
           })
       }
